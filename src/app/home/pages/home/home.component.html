@@ -1,0 +1,72 @@
+<div id="container">
+  <form (ngSubmit)="searchResults()" [formGroup]="resultForm">
+    <ion-list>
+      <ion-item>
+        <ion-label>Year of completion</ion-label>
+        <ion-datetime-button datetime="year"></ion-datetime-button>
+        <ion-popover [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              type="text"
+              id="year"
+              presentation="year"
+              min="2020"
+              [max]="currentYear"
+              [value]="currentYear"
+              name="year"
+              formControlName="year_completed"
+            ></ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Candidate type</ion-label>
+        <ion-select
+          interface="popover"
+          placeholder="Candidate type"
+          formControlName="candidate_type"
+        >
+          <ion-select-option
+            *ngFor="let candidateType of candidateTypes"
+            [value]="candidateType.value"
+            >{{ candidateType.description }}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">School number</ion-label>
+        <ion-input
+          placeholder="1234"
+          inputmode="numeric"
+          formControlName="school_number"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Candidate number</ion-label>
+        <ion-input
+          placeholder="1234"
+          inputmode="numeric"
+          formControlName="candidate_number"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Level</ion-label>
+        <ion-select
+          interface="popover"
+          placeholder="Select level"
+          formControlName="class_level"
+        >
+          <ion-select-option
+            *ngFor="let level of educationLevel"
+            [value]="level.value"
+          >
+            {{ level.description }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-button type="submit" [disabled]="!resultForm.valid"
+      >Search Results</ion-button
+    >
+  </form>
+</div>

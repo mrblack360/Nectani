@@ -4,62 +4,25 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Nectani</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <form>
-      <ion-list>
-        <ion-item>
-          <ion-label>Year of completion</ion-label>
-          <ion-datetime-button datetime="year"></ion-datetime-button>
-          <ion-modal [keepContentsMounted]="true">
-            <ng-template>
-              <ion-datetime
-                id="year"
-                presentation="year"
-                min="2019"
-                [max]="currentYear"
-                value="2020"
-              ></ion-datetime>
-            </ng-template>
-          </ion-modal>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Candidate type</ion-label>
-          <ion-select interface="popover" placeholder="Candidate type">
-            <ion-select-option
-              *ngFor="let candidateType of candidateTypes"
-              [value]="candidateType.value"
-              >{{candidateType.description}}</ion-select-option
-            >
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">School number</ion-label>
-          <ion-input placeholder="S01234"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Candidate number</ion-label>
-          <ion-input placeholder="01234"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Level</ion-label>
-          <ion-select interface="popover" placeholder="Select level">
-            <ion-select-option
-              *ngFor="let level of educationLevel"
-              [value]="level.value"
-            >
-              {{level.description}}
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
-      <ion-button color="success" type="submit">Search Results</ion-button>
-    </form>
-  </div>
+  <ion-router-outlet class="container"></ion-router-outlet>
+
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home">
+        <ion-icon name="home"></ion-icon>
+        Home
+      </ion-tab-button>
+      <ion-tab-button tab="history">
+        <ion-icon name="sync"></ion-icon>
+        History
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>
