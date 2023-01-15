@@ -1,0 +1,7 @@
+{
+  "name": "Nectani",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
