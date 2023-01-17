@@ -1,18 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start" *ngIf="canGoBack()">
+      <ion-icon
+        name="arrow-back-outline"
+        size="large"
+        (click)="goBack()"
+      ></ion-icon>
+    </ion-buttons>
     <ion-title> Nectani </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Nectani</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <ion-router-outlet class="container"></ion-router-outlet>
-
   <ion-tabs>
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="home">

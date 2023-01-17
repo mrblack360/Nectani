@@ -1,4 +1,6 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  constructor() {}
+  constructor(private _location: Location, private router: Router) {}
+
+  canGoBack(): boolean {
+    return this.router.url != '/home/home';
+  }
+
+  goBack() {
+    this._location.back();
+  }
 }
