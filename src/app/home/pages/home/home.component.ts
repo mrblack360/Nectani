@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
     { value: 'csee', description: 'O-Level' },
   ];
   resultForm: FormGroup;
-  constructor(private router: Router) {
+  constructor(private router: Router, private appService: AppService) {
     this.resultForm = new FormGroup({
       year_completed: new FormControl(this.currentYear, [Validators.required]),
       candidate_type: new FormControl('', [Validators.required]),
@@ -31,6 +32,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {}
 
   searchResults() {
+    this.appService.setRequest(this.resultForm.value);
     this.router.navigate(['home/home/results']);
   }
 }

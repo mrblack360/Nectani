@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
   selector: 'app-results',
@@ -6,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./results.component.scss'],
 })
 export class ResultsComponent implements OnInit {
+  data: any;
+  results: any;
+  loaded = false;
+  constructor(private appService: AppService) {
+    this.appService.postResults().subscribe((data) => {
+      this.results = data;
+      setTimeout(() => {
+        this.loaded = true;
+      }, 3000);
+    });
+  }
 
-  constructor() { }
-
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.data = this.appService.getRequest();
+  }
 }
