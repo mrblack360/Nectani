@@ -39,26 +39,18 @@ export class HomePage {
     var history: any = [];
     this.appService.getHistory().then((data) => {
       history = data;
-      console.log('History from storage', data);
       if (history?.some((data: any) => data.key == key)) {
-        console.log(
-          'These results are already saved! Click History to view them'
-        );
         this.showToast(
           'These results are already saved! Click History to view them'
         );
       } else {
         history.push(result);
-        console.log('New History', history);
-
         this.appService.storageSet('history', JSON.stringify(history));
         this.showToast(
           'Results save successfully. Click History to view them later.'
         );
       }
     });
-
-    console.log(result);
   }
   async share() {
     await Share.share({
