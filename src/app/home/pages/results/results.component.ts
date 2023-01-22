@@ -9,14 +9,22 @@ import { AppService } from 'src/app/services/app.service';
 export class ResultsComponent implements OnInit {
   data: any;
   results: any;
+  noResults = false;
   loaded = false;
   constructor(private appService: AppService) {
-    this.appService.postResults().subscribe((data) => {
-      this.results = data;
-      setTimeout(() => {
+    this.appService.postResults().subscribe(
+      (data) => {
+        this.results = data;
+        this.appService.setResults(data);
+        if (this.results.cno) {
+          this.loaded = true;
+        } else this.noResults = true;
+      },
+      (err: any) => {
+        this.noResults = true;
         this.loaded = true;
-      }, 3000);
-    });
+      }
+    );
   }
 
   ngOnInit() {
