@@ -13,11 +13,13 @@
         name="bookmark"
         size="large"
         *ngIf="canViewResults()"
+        (click)="save()"
       ></ion-icon>
       <ion-icon
         name="share-social"
         size="large"
         *ngIf="canViewResults()"
+        (click)="share()"
       ></ion-icon>
       <ion-icon name="ellipsis-vertical" size="large" *ngIf="true"></ion-icon>
     </ion-buttons>

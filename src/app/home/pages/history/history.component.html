@@ -1,3 +1,22 @@
-<p>
-  history works!
-</p>
+<ion-content *ngIf="!noResults">
+  <ion-item button *ngFor="let result of history">
+    <ion-label>
+      <h3>{{ result.cno + "/" + result.year_completed }}</h3>
+      <p>{{ result.detailed }}</p>
+    </ion-label>
+    <ion-note slot="end">{{ timeString(result.time) }}</ion-note>
+  </ion-item>
+</ion-content>
+
+<ion-content *ngIf="noResults">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Oooops</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text>
+        No history found! Search history will be displayed here
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
