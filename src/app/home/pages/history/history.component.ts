@@ -28,17 +28,22 @@ export class HistoryComponent implements OnInit {
 
   timeString(date: any): string {
     let time = '';
+    let mom = moment(date);
     let now = moment();
     let today = now.startOf('day');
     let yesterday = now.subtract(1, 'days').startOf('day');
-    if (now.isSame(moment(date), 'day')) {
-      time = moment(date).format('HH:mm');
-    } else if (moment(date).isSame(yesterday, 'day')) {
-      time = 'Yesterday';
-    } else {
-      time = moment(date).format('YYYY/MM/DD');
-    }
+    let d7 = now.subtract(6, 'days').startOf('day');
+    time = mom.format('YYYY/MM/DD');
 
+    // if (mom.isAfter(today)) {
+    //   time = moment(date).format('HH:mm');
+    // } else if (mom.isAfter(yesterday)) {
+    //   time = 'Yesterday';
+    // } else if (mom.isSame(d7, 'week')) {
+    //   time = mom.format('DDDD');
+    // } else {
+    //   time = mom.format('YYYY/MM/DD');
+    // }
     return time;
   }
   getKeys() {
