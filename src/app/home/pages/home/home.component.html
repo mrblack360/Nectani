@@ -7,6 +7,7 @@
         <ion-popover [keepContentsMounted]="true">
           <ng-template>
             <ion-datetime
+              #year
               type="text"
               id="year"
               presentation="year"
@@ -15,6 +16,7 @@
               [value]="currentYear"
               name="year"
               formControlName="year_completed"
+              (ionChange)="year.confirm(true)"
             ></ion-datetime>
           </ng-template>
         </ion-popover>
