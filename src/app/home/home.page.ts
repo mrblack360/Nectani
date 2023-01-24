@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from '../services/app.service';
 import { Share } from '@capacitor/share';
-import { Toast } from '@capacitor/toast';
+// import { Toast } from '@capacitor/toast';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,8 @@ export class HomePage {
   constructor(
     private _location: Location,
     private router: Router,
-    private appService: AppService
+    private appService: AppService,
+    private toastController: ToastController
   ) {}
 
   canGoBack(): boolean {
@@ -25,9 +27,11 @@ export class HomePage {
     this._location.back();
   }
   canViewResults(): boolean {
+    let results = this.appService.getResults();
     return (
       this.router.url == '/home/home/results' &&
-      this.appService.getResults() != null
+      results != null &&
+      results?.cno != null
     );
   }
   save() {
@@ -39,7 +43,13 @@ export class HomePage {
     var history: any = [];
     this.appService.getHistory().then((data) => {
       history = data;
-      if (history?.some((data: any) => data.key == key)) {
+      console.log('History', data);
+      console.log('Current Result', result);
+      console.log(
+        'Does it contain this result?',
+        history?.some((data: any) => data.key === result.key)
+      );
+      if (history?.some((data: any) => data.key === result.key)) {
         this.showToast(
           'These results are already saved! Click History to view them'
         );
@@ -56,15 +66,17 @@ export class HomePage {
     await Share.share({
       title: 'Share results',
       text: this.appService.getResults().detailed,
-      url: 'https://nectani.findmyschool.co.tz:8081',
+      url: '',
       dialogTitle: 'Share with buddies',
     });
   }
   async showToast(text: string) {
-    await Toast.show({
-      text: text,
+    const toast = await this.toastController.create({
+      message: text,
       position: 'bottom',
-      duration: 'long',
+      duration: 3000,
+      cssClass: 'toast',
     });
+    await toast.present();
   }
 }

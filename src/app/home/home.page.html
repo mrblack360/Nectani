@@ -1,27 +1,21 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start" *ngIf="canGoBack()" style="padding: 5px">
-      <ion-icon
-        name="arrow-back-outline"
-        size="large"
-        (click)="goBack()"
-      ></ion-icon>
+      <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
     </ion-buttons>
     <ion-title> Nectani </ion-title>
     <ion-buttons slot="end" style="padding: 5px">
       <ion-icon
         name="bookmark"
-        size="large"
         *ngIf="canViewResults()"
         (click)="save()"
       ></ion-icon>
       <ion-icon
         name="share-social"
-        size="large"
         *ngIf="canViewResults()"
         (click)="share()"
       ></ion-icon>
-      <ion-icon name="ellipsis-vertical" size="large" *ngIf="true"></ion-icon>
+      <ion-icon name="ellipsis-vertical" *ngIf="true"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
