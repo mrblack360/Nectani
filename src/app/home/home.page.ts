@@ -43,12 +43,6 @@ export class HomePage {
     var history: any = [];
     this.appService.getHistory().then((data) => {
       history = data;
-      console.log('History', data);
-      console.log('Current Result', result);
-      console.log(
-        'Does it contain this result?',
-        history?.some((data: any) => data.key === result.key)
-      );
       if (history?.some((data: any) => data.key === result.key)) {
         this.showToast(
           'These results are already saved! Click History to view them'

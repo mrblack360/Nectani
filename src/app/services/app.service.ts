@@ -26,10 +26,10 @@ export class AppService {
     this._storage = storage;
   }
   public storageSet(key: string, value: any) {
-    this._storage?.set(key, value);
+    localStorage.setItem(key, value);
   }
   public async storageGet(key: string) {
-    const value = await this._storage?.get(key);
+    const value = await localStorage.getItem(key);
     return value;
   }
   public async storageKeysGet() {
@@ -43,7 +43,7 @@ export class AppService {
   }
   async getHistory(): Promise<any[]> {
     const history = await this.storageGet('history');
-    return JSON.parse(history);
+    return JSON.parse(history ? history : '[]');
   }
   setRequest(request: any) {
     this.currentRequest = request;
