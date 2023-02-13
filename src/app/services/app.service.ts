@@ -1,8 +1,6 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { Storage } from '@ionic/storage-angular';
-import * as CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,17 +12,9 @@ export class AppService {
     'Content-Type': 'application/json',
   });
   url = 'https://nectani.findmyschool.co.tz:8081/api/';
-  private _storage: Storage | null = null;
 
-  constructor(private http: HttpClient, private storage: Storage) {
-    this.storageInit();
-  }
+  constructor(private http: HttpClient) {}
 
-  async storageInit() {
-    const storage = await this.storage.create();
-    await this.storage.defineDriver(CordovaSQLiteDriver);
-    this._storage = storage;
-  }
   public storageSet(key: string, value: any) {
     localStorage.setItem(key, value);
   }
@@ -32,10 +22,7 @@ export class AppService {
     const value = await localStorage.getItem(key);
     return value;
   }
-  public async storageKeysGet() {
-    const keys = await this._storage?.keys();
-    return keys;
-  }
+
   postResults(): Observable<any> {
     return this.http.post(this.url + 'candidate', this.currentRequest, {
       headers: this.headers,
@@ -58,116 +45,3 @@ export class AppService {
     return this.currentResults;
   }
 }
-
-export const HISTORY = [
-  {
-    id: 2,
-    cno: 'S0445/0024',
-    time: '2023-01-17T10:22:50.634Z',
-    sex: 'M',
-    aggt: ' 12',
-    div: 'I',
-    year_completed: '2020',
-    detailed:
-      "CIV - 'B'   HIST - 'C'   GEO - 'B'   KISW - 'B'   ENGL - 'A'   LIT ENG - 'B'   PHY - 'C'   CHEM - 'C'   BIO - 'A'   B/MATH - 'B'   ",
-  },
-  {
-    id: 2,
-    cno: 'S0445/0024',
-    time: '2023-01-17T10:22:50.634Z',
-    sex: 'M',
-    aggt: ' 12',
-    div: 'I',
-    year_completed: '2021',
-    detailed:
-      "CIV - 'B'   HIST - 'C'   GEO - 'B'   KISW - 'B'   ENGL - 'A'   LIT ENG - 'B'   PHY - 'C'   CHEM - 'C'   BIO - 'A'   B/MATH - 'B'   ",
-  },
-  {
-    id: 2,
-    cno: 'S0445/0024',
-    time: '2023-01-17T18:22:50.634Z',
-    sex: 'M',
-    aggt: ' 12',
-    div: 'I',
-    year_completed: '2019',
-    detailed:
-      "CIV - 'B'   HIST - 'C'   GEO - 'B'   KISW - 'B'   ENGL - 'A'   LIT ENG - 'B'   PHY - 'C'   CHEM - 'C'   BIO - 'A'   B/MATH - 'B'   ",
-  },
-  {
-    id: 2,
-    cno: 'S0445/0024',
-    time: '2023-01-16T18:22:50.634Z',
-    sex: 'M',
-    aggt: ' 12',
-    div: 'I',
-    year_completed: '2019',
-    detailed:
-      "CIV - 'B'   HIST - 'C'   GEO - 'B'   KISW - 'B'   ENGL - 'A'   LIT ENG - 'B'   PHY - 'C'   CHEM - 'C'   BIO - 'A'   B/MATH - 'B'   ",
-  },
-  {
-    id: 2,
-    cno: 'S0445/0024',
-    time: '2020-01-18T18:22:50.634Z',
-    sex: 'M',
-    aggt: ' 12',
-    div: 'I',
-    year_completed: '2020',
-    detailed:
-      "CIV - 'B'   HIST - 'C'   GEO - 'B'   KISW - 'B'   ENGL - 'A'   LIT ENG - 'B'   PHY - 'C'   CHEM - 'C'   BIO - 'A'   B/MATH - 'B'   ",
-  },
-  {
-    id: 2,
-    cno: 'S0445/0024',
-    time: '2022-01-18T18:22:50.634Z',
-    sex: 'M',
-    aggt: ' 12',
-    year_completed: '2020',
-    div: 'I',
-    detailed:
-      "CIV - 'B'   HIST - 'C'   GEO - 'B'   KISW - 'B'   ENGL - 'A'   LIT ENG - 'B'   PHY - 'C'   CHEM - 'C'   BIO - 'A'   B/MATH - 'B'   ",
-  },
-  {
-    id: 2,
-    cno: 'S0445/0024',
-    time: '2022-01-18T18:22:50.634Z',
-    sex: 'M',
-    aggt: ' 12',
-    year_completed: '2020',
-    div: 'I',
-    detailed:
-      "CIV - 'B'   HIST - 'C'   GEO - 'B'   KISW - 'B'   ENGL - 'A'   LIT ENG - 'B'   PHY - 'C'   CHEM - 'C'   BIO - 'A'   B/MATH - 'B'   ",
-  },
-  {
-    id: 2,
-    cno: 'S0445/0024',
-    time: '2022-01-18T18:22:50.634Z',
-    sex: 'M',
-    aggt: ' 12',
-    year_completed: '2020',
-    div: 'I',
-    detailed:
-      "CIV - 'B'   HIST - 'C'   GEO - 'B'   KISW - 'B'   ENGL - 'A'   LIT ENG - 'B'   PHY - 'C'   CHEM - 'C'   BIO - 'A'   B/MATH - 'B'   ",
-  },
-  {
-    id: 2,
-    cno: 'S0445/0024',
-    time: '2022-01-18T18:22:50.634Z',
-    sex: 'M',
-    aggt: ' 12',
-    year_completed: '2020',
-    div: 'I',
-    detailed:
-      "CIV - 'B'   HIST - 'C'   GEO - 'B'   KISW - 'B'   ENGL - 'A'   LIT ENG - 'B'   PHY - 'C'   CHEM - 'C'   BIO - 'A'   B/MATH - 'B'   ",
-  },
-  {
-    id: 2,
-    cno: 'S0445/0024',
-    time: '2022-01-18T18:22:50.634Z',
-    sex: 'M',
-    aggt: ' 12',
-    year_completed: '2020',
-    div: 'I',
-    detailed:
-      "CIV - 'B'   HIST - 'C'   GEO - 'B'   KISW - 'B'   ENGL - 'A'   LIT ENG - 'B'   PHY - 'C'   CHEM - 'C'   BIO - 'A'   B/MATH - 'B'   ",
-  },
-];
