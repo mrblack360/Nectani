@@ -1,11 +1,20 @@
 <ion-content *ngIf="!noResults">
-  <ion-item button *ngFor="let result of history">
-    <ion-label>
-      <h3>{{ result.cno + "/" + result.year_completed }}</h3>
-      <p>{{ result.detailed }}</p>
-    </ion-label>
-    <ion-note slot="end">{{ timeString(result.time) }}</ion-note>
-  </ion-item>
+  <ion-list>
+    <ion-item-sliding *ngFor="let result of history; let i = index">
+      <ion-item button>
+        <ion-label>
+          <h3>{{ result.cno + "/" + result.year_completed }}</h3>
+          <p>{{ result.detailed }}</p>
+        </ion-label>
+        <ion-note slot="end">{{ timeString(result.time) }}</ion-note>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteHistory(i)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
 
 <ion-content *ngIf="noResults">

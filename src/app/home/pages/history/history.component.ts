@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
 import * as moment from 'moment';
+import { ActionSheetController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-history',
@@ -11,7 +12,11 @@ export class HistoryComponent implements OnInit {
   history: any = [];
   loading = true;
   noResults = false;
-  constructor(private appService: AppService) {
+  constructor(
+    private appService: AppService,
+    private actionCtrl: ActionSheetController,
+    private toastController: ToastController
+  ) {
     this.appService
       .getHistory()
       .then((data: any[]) => {
@@ -46,11 +51,35 @@ export class HistoryComponent implements OnInit {
     // }
     return time;
   }
-  getKeys() {
-    var keys;
-    this.appService.storageKeysGet().then((keys) => {
-      keys = keys;
+  async deleteHistory(index: number) {
+    const actionSheet = this.actionCtrl.create({
+      header: "You're about to delete saved results. Are you sure?",
+      buttons: [
+        {
+          text: 'Yes',
+          role: 'confirm',
+          handler: async () => {
+            this.history.splice(index, 1);
+            this.appService.storageSet('history', JSON.stringify(this.history));
+            await this.showToast('Results have been deleted successfully');
+          },
+        },
+        {
+          text: 'No',
+          role: 'cancel',
+        },
+      ],
     });
-    return keys;
+    (await actionSheet).present();
+  }
+
+  async showToast(text: string) {
+    const toast = await this.toastController.create({
+      message: text,
+      position: 'bottom',
+      duration: 3000,
+      cssClass: 'toast',
+    });
+    await toast.present();
   }
 }
