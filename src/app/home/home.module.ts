@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { HistoryComponent } from './pages/history/history.component';
 import { ResultsComponent } from './pages/results/results.component';
+import { HistoryViewComponent } from './pages/history-view/history-view.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,12 @@ import { ResultsComponent } from './pages/results/results.component';
     HomePageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [HomePage, HomeComponent, HistoryComponent, ResultsComponent],
+  declarations: [
+    HomePage,
+    HomeComponent,
+    HistoryComponent,
+    ResultsComponent,
+    HistoryViewComponent,
+  ],
 })
 export class HomePageModule {}

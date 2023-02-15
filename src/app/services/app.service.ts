@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class AppService {
   currentRequest: any;
   currentResults: any;
+  currentHistory: any;
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
   });
@@ -43,5 +44,11 @@ export class AppService {
   }
   getResults() {
     return this.currentResults;
+  }
+  setCurrentHistory(history: any) {
+    this.currentHistory = history;
+  }
+  getCurrentHistory(): any {
+    return this.currentHistory;
   }
 }

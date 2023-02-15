@@ -1,7 +1,7 @@
 <ion-content *ngIf="!noResults">
   <ion-list>
     <ion-item-sliding *ngFor="let result of history; let i = index">
-      <ion-item button>
+      <ion-item button (click)="viewHistory(i)">
         <ion-label>
           <h3>{{ result.cno + "/" + result.year_completed }}</h3>
           <p>{{ result.detailed }}</p>

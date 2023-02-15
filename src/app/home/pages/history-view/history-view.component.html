@@ -1,0 +1,134 @@
+<ion-content id="results">
+  <div *ngIf="!noResults">
+    <ion-list *ngIf="loaded">
+      <ion-item>
+        <ion-label>Year of completion</ion-label>
+        <ion-note slot="end">{{ results.year_completed }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Candidate Number</ion-label>
+        <ion-note slot="end">{{ results.cno }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Sex</ion-label>
+        <ion-note slot="end">{{
+          results.sex == "M" ? "MALE" : results.sex == "F" ? "FEMALE" : ""
+        }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Division</ion-label>
+        <ion-note slot="end">{{ results.div }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Aggregates</ion-label>
+        <ion-note slot="end">{{ results.aggt }}</ion-note>
+      </ion-item>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Details</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{ results.detailed }}
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+    <ion-list *ngIf="!loaded">
+      <ion-item>
+        <ion-label
+          ><ion-skeleton-text
+            [animated]="true"
+            style="width: 80px"
+          ></ion-skeleton-text
+        ></ion-label>
+        <ion-note slot="end"
+          ><ion-skeleton-text
+            [animated]="true"
+            style="width: 40px"
+          ></ion-skeleton-text
+        ></ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label
+          ><ion-skeleton-text
+            [animated]="true"
+            style="width: 80px"
+          ></ion-skeleton-text
+        ></ion-label>
+        <ion-note slot="end"
+          ><ion-skeleton-text
+            [animated]="true"
+            style="width: 80px"
+          ></ion-skeleton-text
+        ></ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label
+          ><ion-skeleton-text
+            [animated]="true"
+            style="width: 20px"
+          ></ion-skeleton-text
+        ></ion-label>
+        <ion-note slot="end"
+          ><ion-skeleton-text
+            [animated]="true"
+            style="width: 80px"
+          ></ion-skeleton-text
+        ></ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label
+          ><ion-skeleton-text
+            [animated]="true"
+            style="width: 50px"
+          ></ion-skeleton-text
+        ></ion-label>
+        <ion-note slot="end"
+          ><ion-skeleton-text
+            [animated]="true"
+            style="width: 20px"
+          ></ion-skeleton-text
+        ></ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label
+          ><ion-skeleton-text
+            [animated]="true"
+            style="width: 80px"
+          ></ion-skeleton-text
+        ></ion-label>
+        <ion-note slot="end"
+          ><ion-skeleton-text
+            [animated]="true"
+            style="width: 30px"
+          ></ion-skeleton-text
+        ></ion-note>
+      </ion-item>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle
+            ><ion-skeleton-text
+              [animated]="true"
+              style="width: 80px"
+            ></ion-skeleton-text
+          ></ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 100%; height: 100px"
+          ></ion-skeleton-text>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </div>
+  <div *ngIf="noResults">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Oooops</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-text>Could not load results! It's not your fault though</ion-text>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

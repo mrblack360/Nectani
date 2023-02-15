@@ -4,6 +4,7 @@ import { HomePage } from './home.page';
 import { HistoryComponent } from './pages/history/history.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ResultsComponent } from './pages/results/results.component';
+import { HistoryViewComponent } from './pages/history-view/history-view.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'home/results', component: ResultsComponent },
       { path: 'history', component: HistoryComponent },
+      { path: 'history/view', component: HistoryViewComponent },
     ],
   },
 ];

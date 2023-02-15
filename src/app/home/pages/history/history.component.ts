@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
 import * as moment from 'moment';
 import { ActionSheetController, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-history',
@@ -15,7 +16,8 @@ export class HistoryComponent implements OnInit {
   constructor(
     private appService: AppService,
     private actionCtrl: ActionSheetController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private router: Router
   ) {
     this.appService
       .getHistory()
@@ -71,6 +73,11 @@ export class HistoryComponent implements OnInit {
       ],
     });
     (await actionSheet).present();
+  }
+
+  viewHistory(index: number) {
+    this.appService.setCurrentHistory(this.history[index]);
+    this.router.navigate(['home/history/view']);
   }
 
   async showToast(text: string) {
