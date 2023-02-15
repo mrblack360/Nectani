@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from '../services/app.service';
 import { Share } from '@capacitor/share';
-// import { Toast } from '@capacitor/toast';
 import { ToastController } from '@ionic/angular';
+import { toJpeg, toBlob } from 'html-to-image';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +27,17 @@ export class HomePage {
     this._location.back();
   }
   canViewResults(): boolean {
+    let results = this.appService.getResults();
+    return (
+      (this.router.url == '/home/home/results' &&
+        results != null &&
+        results?.cno != null) ||
+      (this.router.url == '/home/history/view' &&
+        this.appService.getCurrentHistory()?.cno != null)
+    );
+  }
+
+  canSave(): boolean {
     let results = this.appService.getResults();
     return (
       this.router.url == '/home/home/results' &&
@@ -57,12 +68,52 @@ export class HomePage {
     });
   }
   async share() {
-    await Share.share({
-      title: 'Share results',
-      text: this.appService.getResults().detailed,
-      url: '',
-      dialogTitle: 'Share with buddies',
+    var results: any;
+    if (this.canSave()) results = this.appService.getResults();
+    else results = this.appService.getCurrentHistory();
+    let node: HTMLDivElement = document.createElement('div');
+    node.id = 'myDiv';
+    node.innerHTML =
+      '<style> .container {background: #fff; color:#000;} .watermark { display: block; position: relative; } .watermark::after { width:400px; content: ""; background:url("assets/icon/favicon.png"); opacity: 0.1; top: 0; left: 0; bottom: 0; right: 0; position: absolute; z-index: -1; background-repeat:no-repeat; background-size: cover; } table { background:#ffffff; color:#000000; font-family: arial, sans-serif; border-collapse: collapse; width: 400px; } td, th { border: 1px solid #dddddd; text-align: left; padding: 8px; } </style> <div class="watermark"> <table> <tr> <th>Index Number</th> <td>' +
+      results?.cno +
+      '/' +
+      results?.year_completed +
+      '</td> </tr> <tr> <th>Gender</th> <td>' +
+      (results?.sex == 'M' ? 'MALE' : results?.sex == 'F' ? 'FEMALE' : '') +
+      '</td> </tr> <tr> <th>Division</th> <td>' +
+      results?.div +
+      '</td> </tr> <tr> <th>Aggregates</th> <td>' +
+      results?.aggt +
+      '</td> </tr> <tr> <th colspan="2">Details</th> </tr> <tr> <td colspan="2">' +
+      results?.detailed +
+      '</td> </tr> </table> </div>';
+    document.body.appendChild(node);
+    toJpeg(node).then(async (dataUrl) => {
+      let link = document.createElement('a');
+      link.download = results?.key + '.jpeg';
+      link.href = dataUrl;
+      link.click();
+
+      await Share.share({
+        title: 'Nectani - Share Results',
+        text:
+          'The results for ' +
+          results?.cno +
+          '/' +
+          results?.year_completed +
+          ' is Division ' +
+          results?.div +
+          ' of Aggregates ' +
+          results?.aggt +
+          ' and detailed as: ' +
+          results?.detailed +
+          '\nGet your own results and more at ',
+        url: 'https://nectani.findmyschool.co.tz:8081',
+        dialogTitle: 'Share with buddies',
+        // files: ['file:///C:/Users/23149475/Pictures/favicon.png'],
+      });
     });
+    document.body.removeChild(node);
   }
   async showToast(text: string) {
     const toast = await this.toastController.create({

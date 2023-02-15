@@ -5,11 +5,7 @@
     </ion-buttons>
     <ion-title> Nectani </ion-title>
     <ion-buttons slot="end" style="padding: 5px">
-      <ion-icon
-        name="bookmark"
-        *ngIf="canViewResults()"
-        (click)="save()"
-      ></ion-icon>
+      <ion-icon name="bookmark" *ngIf="canSave()" (click)="save()"></ion-icon>
       <ion-icon
         name="share-social"
         *ngIf="canViewResults()"
