@@ -1,0 +1,11 @@
+<ion-content class="ion-padding">
+  <ion-item
+    button
+    lines="none"
+    *ngFor="let item of menuItems"
+    (click)="item.handler()"
+  >
+    <ion-icon slot="start" [name]="item.icon"></ion-icon>
+    <ion-label>{{ item.label ? item.label : "" }}</ion-label>
+  </ion-item>
+</ion-content>
