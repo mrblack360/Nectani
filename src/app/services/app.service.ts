@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, Renderer2, RendererFactory2 } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DOCUMENT } from '@angular/common';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,12 +10,28 @@ export class AppService {
   currentRequest: any;
   currentResults: any;
   currentHistory: any;
+  renderer: Renderer2;
+  currentTheme: any;
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
   });
   url = 'https://nectani.findmyschool.co.tz:8081/api/';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private rendererFactory: RendererFactory2,
+    @Inject(DOCUMENT) private document: Document
+  ) {
+    this.renderer = this.rendererFactory.createRenderer(null, null);
+    if (localStorage.getItem('theme')) {
+      this.changeTheme(localStorage.getItem('theme'));
+      console.log(localStorage.getItem('theme'));
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+      if (prefersDark.matches) this.changeTheme('dark');
+      else this.changeTheme();
+    }
+  }
 
   public storageSet(key: string, value: any) {
     localStorage.setItem(key, value);
@@ -50,5 +67,11 @@ export class AppService {
   }
   getCurrentHistory(): any {
     return this.currentHistory;
+  }
+  changeTheme(theme: any = 'default') {
+    this.renderer.removeClass(this.document.body, this.currentTheme);
+    this.currentTheme = theme;
+    localStorage.setItem('theme', theme);
+    this.renderer.addClass(this.document.body, theme);
   }
 }
