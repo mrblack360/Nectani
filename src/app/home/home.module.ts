@@ -9,6 +9,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { HistoryComponent } from './pages/history/history.component';
 import { ResultsComponent } from './pages/results/results.component';
 import { HistoryViewComponent } from './pages/history-view/history-view.component';
+import { ContextMenuComponent } from './pages/context-menu/context-menu.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { HistoryViewComponent } from './pages/history-view/history-view.componen
     HistoryComponent,
     ResultsComponent,
     HistoryViewComponent,
+    ContextMenuComponent,
   ],
 })
 export class HomePageModule {}

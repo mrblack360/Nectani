@@ -3,8 +3,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppService } from '../services/app.service';
 import { Share } from '@capacitor/share';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { toJpeg, toBlob } from 'html-to-image';
+import { ContextMenuComponent } from './pages/context-menu/context-menu.component';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ export class HomePage {
     private _location: Location,
     private router: Router,
     private appService: AppService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private modalController: ModalController
   ) {}
 
   canGoBack(): boolean {
@@ -115,6 +117,13 @@ export class HomePage {
     });
     document.body.removeChild(node);
   }
+  async openMenu() {
+    const contextMenu = this.modalController.create({
+      component: ContextMenuComponent,
+    });
+    (await contextMenu).present();
+  }
+
   async showToast(text: string) {
     const toast = await this.toastController.create({
       message: text,

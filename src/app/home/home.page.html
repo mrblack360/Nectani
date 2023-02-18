@@ -11,7 +11,11 @@
         *ngIf="canViewResults()"
         (click)="share()"
       ></ion-icon>
-      <ion-icon name="ellipsis-vertical" *ngIf="true"></ion-icon>
+      <ion-icon
+        name="ellipsis-vertical"
+        *ngIf="true"
+        (click)="openMenu()"
+      ></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
