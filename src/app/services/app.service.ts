@@ -25,7 +25,6 @@ export class AppService {
     this.renderer = this.rendererFactory.createRenderer(null, null);
     if (localStorage.getItem('theme')) {
       this.changeTheme(localStorage.getItem('theme'));
-      console.log(localStorage.getItem('theme'));
     } else {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
       if (prefersDark.matches) this.changeTheme('dark');
