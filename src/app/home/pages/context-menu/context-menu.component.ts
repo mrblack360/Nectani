@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 import { AppService } from 'src/app/services/app.service';
-
+import { Share } from '@capacitor/share';
 @Component({
   selector: 'app-context-menu',
   templateUrl: './context-menu.component.html',
@@ -66,7 +66,13 @@ export class ContextMenuComponent implements OnInit {
     {
       label: 'Share with friends',
       icon: 'share-social-outline',
-      handler: () => {},
+      handler: async () => {
+        await Share.share({
+          title: 'Nectani - Share',
+          text: 'Hi,\nYou can view your NECTA results using Nectani App. Click the below link to download',
+          url: 'https://nectani.findmyschool.co.tz:8081',
+        });
+      },
     },
     {
       label: 'Rate Us',
@@ -76,17 +82,23 @@ export class ContextMenuComponent implements OnInit {
     {
       label: 'About Us',
       icon: 'information-circle-outline',
-      handler: () => {},
+      handler: () => {
+        window.open('https://nectani.findmyschool.co.tz:8081', '_system');
+      },
     },
     {
       label: 'Terms & Conditions',
       icon: 'list-circle-outline',
-      handler: () => {},
+      handler: () => {
+        window.open('https://nectani.findmyschool.co.tz:8081', '_system');
+      },
     },
     {
       label: 'Privacy Policy',
       icon: 'document-lock-outline',
-      handler: () => {},
+      handler: () => {
+        window.open('https://nectani.findmyschool.co.tz:8081', '_system');
+      },
     },
   ];
   constructor(
