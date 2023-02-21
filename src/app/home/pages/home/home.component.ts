@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {
+  ToastController,
+  GestureController,
+  ActionSheetController,
+} from '@ionic/angular';
 import { AppService } from 'src/app/services/app.service';
 
 @Component({
@@ -19,7 +24,13 @@ export class HomeComponent implements OnInit {
     { value: 'csee', description: 'O-Level' },
   ];
   resultForm: FormGroup;
-  constructor(private router: Router, private appService: AppService) {
+  constructor(
+    private router: Router,
+    private appService: AppService,
+    private toastController: ToastController,
+    private gestureController: GestureController,
+    private container: ElementRef
+  ) {
     this.resultForm = new FormGroup({
       year_completed: new FormControl(this.currentYear, [Validators.required]),
       candidate_type: new FormControl('', [Validators.required]),
@@ -27,12 +38,42 @@ export class HomeComponent implements OnInit {
       candidate_number: new FormControl('', [Validators.required]),
       class_level: new FormControl('', [Validators.required]),
     });
+    const gesture = this.gestureController.create(
+      {
+        el: this.container?.nativeElement,
+        onMove: (details) => {
+          if (details.startY < details.currentY) {
+            this.resultForm.reset();
+          }
+        },
+        gestureName: 'swipe-down',
+        direction: 'y',
+      },
+      true
+    );
+    gesture.enable();
   }
 
   ngOnInit() {}
 
+  ionViewDidEnter() {
+    if (this.resultForm.touched) {
+      this.showToast('You can swipe down to clear form values at once');
+    }
+  }
+
   searchResults() {
     this.appService.setRequest(this.resultForm.value);
     this.router.navigate(['home/home/results']);
+  }
+
+  async showToast(text: string) {
+    const toast = await this.toastController.create({
+      message: text,
+      position: 'bottom',
+      duration: 3000,
+      cssClass: 'toast',
+    });
+    await toast.present();
   }
 }
