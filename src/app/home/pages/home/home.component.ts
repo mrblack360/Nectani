@@ -1,11 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {
-  ToastController,
-  GestureController,
-  ActionSheetController,
-} from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { AppService } from 'src/app/services/app.service';
 
 @Component({
@@ -27,9 +23,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     private appService: AppService,
-    private toastController: ToastController,
-    private gestureController: GestureController,
-    private container: ElementRef
+    private toastController: ToastController
   ) {
     this.resultForm = new FormGroup({
       year_completed: new FormControl(this.currentYear, [Validators.required]),
@@ -38,20 +32,6 @@ export class HomeComponent implements OnInit {
       candidate_number: new FormControl('', [Validators.required]),
       class_level: new FormControl('', [Validators.required]),
     });
-    const gesture = this.gestureController.create(
-      {
-        el: this.container?.nativeElement,
-        onMove: (details) => {
-          if (details.startY < details.currentY) {
-            this.resultForm.reset();
-          }
-        },
-        gestureName: 'swipe-down',
-        direction: 'y',
-      },
-      true
-    );
-    gesture.enable();
   }
 
   ngOnInit() {}
@@ -65,6 +45,13 @@ export class HomeComponent implements OnInit {
   searchResults() {
     this.appService.setRequest(this.resultForm.value);
     this.router.navigate(['home/home/results']);
+  }
+
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      event.target.complete();
+      this.resultForm.reset();
+    }, 1000);
   }
 
   async showToast(text: string) {

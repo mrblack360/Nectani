@@ -1,78 +1,91 @@
-<div id="container">
-  <form (ngSubmit)="searchResults()" [formGroup]="resultForm">
-    <ion-list>
-      <ion-item>
-        <ion-label>Year of completion</ion-label>
-        <ion-datetime-button datetime="year"></ion-datetime-button>
-        <ion-popover [keepContentsMounted]="true">
-          <ng-template>
-            <ion-datetime
-              #year
-              type="text"
-              id="year"
-              presentation="year"
-              min="2020"
-              [max]="currentYear"
-              [value]="currentYear"
-              name="year"
-              formControlName="year_completed"
-              (ionChange)="year.confirm(true)"
-            ></ion-datetime>
-          </ng-template>
-        </ion-popover>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Candidate type</ion-label>
-        <ion-select
-          interface="popover"
-          placeholder="Candidate type"
-          formControlName="candidate_type"
-        >
-          <ion-select-option
-            *ngFor="let candidateType of candidateTypes"
-            [value]="candidateType.value"
-            >{{ candidateType.description }}</ion-select-option
+<ion-content>
+  <ion-refresher
+    slot="fixed"
+    [pullFactor]="1"
+    (ionRefresh)="handleRefresh($event)"
+  >
+    <ion-refresher-content
+      refreshingSpinner="circles"
+      refreshingText="Clearing form details..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+  <div id="container">
+    <form (ngSubmit)="searchResults()" [formGroup]="resultForm">
+      <ion-list>
+        <ion-item>
+          <ion-label>Year of completion</ion-label>
+          <ion-datetime-button datetime="year"></ion-datetime-button>
+          <ion-popover [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime
+                #year
+                type="text"
+                id="year"
+                presentation="year"
+                min="2020"
+                [max]="currentYear"
+                [value]="currentYear"
+                name="year"
+                formControlName="year_completed"
+                (ionChange)="year.confirm(true)"
+              ></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Candidate type</ion-label>
+          <ion-select
+            interface="popover"
+            placeholder="Candidate type"
+            formControlName="candidate_type"
           >
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">School number</ion-label>
-        <ion-input
-          placeholder="1234"
-          inputmode="numeric"
-          type="number"
-          formControlName="school_number"
-        ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Candidate number</ion-label>
-        <ion-input
-          placeholder="1234"
-          inputmode="numeric"
-          type="number"
-          formControlName="candidate_number"
-        ></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Level</ion-label>
-        <ion-select
-          interface="popover"
-          placeholder="Select level"
-          formControlName="class_level"
-        >
-          <ion-select-option
-            *ngFor="let level of educationLevel"
-            [value]="level.value"
+            <ion-select-option
+              *ngFor="let candidateType of candidateTypes"
+              [value]="candidateType.value"
+              >{{ candidateType.description }}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">School number</ion-label>
+          <ion-input
+            placeholder="1234"
+            inputmode="numeric"
+            type="number"
+            formControlName="school_number"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Candidate number</ion-label>
+          <ion-input
+            placeholder="1234"
+            inputmode="numeric"
+            type="number"
+            formControlName="candidate_number"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Level</ion-label>
+          <ion-select
+            interface="popover"
+            placeholder="Select level"
+            formControlName="class_level"
           >
-            {{ level.description }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
-    <div style="margin: 10px">
-      <ion-button type="submit" [disabled]="!resultForm.valid">
-        Search Results
-      </ion-button>
-    </div>
-  </form>
-</div>
+            <ion-select-option
+              *ngFor="let level of educationLevel"
+              [value]="level.value"
+            >
+              {{ level.description }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <div style="margin: 10px">
+        <ion-button type="submit" [disabled]="!resultForm.valid">
+          Search Results
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>
