@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { AppService } from 'src/app/services/app.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     private appService: AppService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private translate: TranslateService
   ) {
     this.resultForm = new FormGroup({
       year_completed: new FormControl(this.currentYear, [Validators.required]),

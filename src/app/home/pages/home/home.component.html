@@ -14,7 +14,7 @@
     <form (ngSubmit)="searchResults()" [formGroup]="resultForm">
       <ion-list>
         <ion-item>
-          <ion-label>Year of completion</ion-label>
+          <ion-label>{{ "global.year_of_completion" | translate }}</ion-label>
           <ion-datetime-button datetime="year"></ion-datetime-button>
           <ion-popover [keepContentsMounted]="true">
             <ng-template>
@@ -34,10 +34,12 @@
           </ion-popover>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Candidate type</ion-label>
+          <ion-label position="floating">{{
+            "home.candidate_type" | translate
+          }}</ion-label>
           <ion-select
             interface="popover"
-            placeholder="Candidate type"
+            [placeholder]="'home.candidate_type' | translate"
             formControlName="candidate_type"
           >
             <ion-select-option
@@ -48,7 +50,9 @@
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">School number</ion-label>
+          <ion-label position="floating">{{
+            "home.school_number" | translate
+          }}</ion-label>
           <ion-input
             placeholder="1234"
             inputmode="numeric"
@@ -57,7 +61,9 @@
           ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Candidate number</ion-label>
+          <ion-label position="floating">{{
+            "global.candidate_number" | translate
+          }}</ion-label>
           <ion-input
             placeholder="1234"
             inputmode="numeric"
@@ -66,10 +72,12 @@
           ></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Level</ion-label>
+          <ion-label position="floating">{{
+            "home.level" | translate
+          }}</ion-label>
           <ion-select
             interface="popover"
-            placeholder="Select level"
+            [placeholder]="'home.select_level' | translate"
             formControlName="class_level"
           >
             <ion-select-option
@@ -83,7 +91,7 @@
       </ion-list>
       <div style="margin: 10px">
         <ion-button type="submit" [disabled]="!resultForm.valid">
-          Search Results
+          {{ "home.search_results" | translate }}
         </ion-button>
       </div>
     </form>

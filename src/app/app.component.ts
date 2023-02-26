@@ -8,11 +8,5 @@ import { AppService } from './services/app.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(
-    private appService: AppService,
-    private translate: TranslateService
-  ) {
-    translate.setDefaultLang('en');
-    translate.use('en');
-  }
+  constructor(private appService: AppService) {}
 }
