@@ -4,7 +4,16 @@
     "history": "Historia",
     "year_of_completion": "Mwaka wa kumaliza",
     "candidate_number": "Namba ya mtahiniwa",
-    "details": "Maelezo"
+    "details": "Maelezo",
+    "no_results": "Hakuna matokeo yaliyopatikana!",
+    "could_not_load_results": "Haikuweza kupakia matokeo! Sio kosa lako ingawa",
+    "sex": "Jinsia",
+    "sexs": {
+      "male": "Mvulana",
+      "female": "Msichana"
+    },
+    "division": "Daraja",
+    "aggregates": "Pointi"
   },
   "home": {
     "school_number": "Namba ya shule",
@@ -16,5 +25,28 @@
       "private": "Binafsi",
       "school": "Shule"
     }
+  },
+  "history": {
+    "no_history": "Hakuna historia iliyopatikana! Historia ya utafutaji wa matokeo itaonyeshwa hapa"
+  },
+  "context_menu": {
+    "change_theme": {
+      "label": "Badilisha Mandhari",
+      "header": "Unakaribia kubadilisha mandhari kuwa {{theme}}. Uko tayari?"
+    },
+    "confirmation": {
+      "yes": "Ndio",
+      "no": "Hapana"
+    },
+    "change_language": "Badili Lugha",
+    "share_app": {
+      "label": "Shiriki na marafiki",
+      "title": "Nectani - Shirikisha",
+      "text": "Habari,\nUnaweza kuangalia matokeo yako ya NECTA kwa kutumia app ya Nectani. Bonyeza kiunganishi kufuatacho kuipakua"
+    },
+    "rate_app": "Tukadirie",
+    "about_us": "Kuhusu sisi",
+    "terms_and_conditions": "Sheria na Masharti",
+    "privacy_policy": "Sera ya Faragha"
   }
 }

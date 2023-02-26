@@ -117,7 +117,7 @@ export class HomePage {
     });
     document.body.removeChild(node);
   }
-  async openMenu() {
+  public async openMenu() {
     const contextMenu = this.modalController.create({
       component: ContextMenuComponent,
     });

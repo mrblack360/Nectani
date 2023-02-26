@@ -4,7 +4,16 @@
     "history": "History",
     "year_of_completion": "Year of completion",
     "candidate_number": "Candidate number",
-    "details": "Details"
+    "details": "Details",
+    "no_results": "No results found!",
+    "could_not_load_results": "Could not load results! It's not your fault though",
+    "sex": "Sex",
+    "sexs": {
+      "male": "Male",
+      "female": "Female"
+    },
+    "division": "Division",
+    "aggregates": "Aggregates"
   },
   "home": {
     "candidate_type": "Candidate type",
@@ -16,5 +25,28 @@
       "private": "Private",
       "school": "School"
     }
+  },
+  "history": {
+    "no_history": "No history found! Search history will be displayed here"
+  },
+  "context_menu": {
+    "change_theme": {
+      "label": "Change Theme",
+      "header": "You're about to change to {{theme}} theme. Are you sure?"
+    },
+    "confirmation": {
+      "yes": "Yes",
+      "no": "No"
+    },
+    "change_language": "Change Language",
+    "share_app": {
+      "label": "Share with friends",
+      "title": "Nectani - Share",
+      "text": "Hi,\nYou can view your NECTA results using Nectani App. Click the below link to download"
+    },
+    "rate_app": "Rate Us",
+    "about_us": "About Us",
+    "terms_and_conditions": "Terms & Conditions",
+    "privacy_policy": "Privacy Policy"
   }
 }

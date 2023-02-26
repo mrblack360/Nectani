@@ -2,30 +2,34 @@
   <div *ngIf="!noResults">
     <ion-list *ngIf="loaded">
       <ion-item>
-        <ion-label>Year of completion</ion-label>
+        <ion-label>{{ "global.year_of_completion" | translate }}</ion-label>
         <ion-note slot="end">{{ data.year_completed }}</ion-note>
       </ion-item>
       <ion-item>
-        <ion-label>Candidate Number</ion-label>
+        <ion-label>{{ "global.candidate_number" | translate }}</ion-label>
         <ion-note slot="end">{{ results.cno }}</ion-note>
       </ion-item>
       <ion-item>
-        <ion-label>Sex</ion-label>
+        <ion-label>{{ "global.sex" | translate }}</ion-label>
         <ion-note slot="end">{{
-          results.sex == "M" ? "MALE" : results.sex == "F" ? "FEMALE" : ""
+          "global.sexs." +
+            (results.sex == "M" ? "male" : results.sex == "F" ? "female" : "")
+            | translate
         }}</ion-note>
       </ion-item>
       <ion-item>
-        <ion-label>Division</ion-label>
+        <ion-label>{{ "global.division" | translate }}</ion-label>
         <ion-note slot="end">{{ results.div }}</ion-note>
       </ion-item>
       <ion-item>
-        <ion-label>Aggregates</ion-label>
+        <ion-label>{{ "global.aggregates" | translate }}</ion-label>
         <ion-note slot="end">{{ results.aggt }}</ion-note>
       </ion-item>
       <ion-card>
         <ion-card-header>
-          <ion-card-subtitle>Details</ion-card-subtitle>
+          <ion-card-subtitle>{{
+            "global.details" | translate
+          }}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
           {{ results.detailed }}
@@ -127,7 +131,7 @@
         <ion-card-title>Oooops</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <ion-text>No results found!</ion-text>
+        <ion-text>{{ "global.no_results" | translate }}</ion-text>
       </ion-card-content>
     </ion-card>
   </div>
