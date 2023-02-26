@@ -2,6 +2,7 @@ import { Injectable, Inject, Renderer2, RendererFactory2 } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DOCUMENT } from '@angular/common';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ export class AppService {
   currentHistory: any;
   renderer: Renderer2;
   currentTheme: any;
+  currentLanguage: any;
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
   });
@@ -20,7 +22,8 @@ export class AppService {
   constructor(
     private http: HttpClient,
     private rendererFactory: RendererFactory2,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    private translate: TranslateService
   ) {
     this.renderer = this.rendererFactory.createRenderer(null, null);
     if (localStorage.getItem('theme')) {
@@ -29,6 +32,11 @@ export class AppService {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
       if (prefersDark.matches) this.changeTheme('dark');
       else this.changeTheme();
+    }
+    if (localStorage.getItem('language') != null) {
+      this.changeLanguage(localStorage.getItem('language') as string);
+    } else {
+      this.changeLanguage('en');
     }
   }
 
@@ -72,5 +80,10 @@ export class AppService {
     this.currentTheme = theme;
     localStorage.setItem('theme', theme);
     this.renderer.addClass(this.document.body, theme);
+  }
+  changeLanguage(language: string = 'en') {
+    this.currentLanguage = language;
+    localStorage.setItem('language', language);
+    this.translate.use(language);
   }
 }

@@ -10,6 +10,7 @@ import { HistoryComponent } from './pages/history/history.component';
 import { ResultsComponent } from './pages/results/results.component';
 import { HistoryViewComponent } from './pages/history-view/history-view.component';
 import { ContextMenuComponent } from './pages/context-menu/context-menu.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { ContextMenuComponent } from './pages/context-menu/context-menu.componen
     IonicModule,
     HomePageRoutingModule,
     ReactiveFormsModule,
+    TranslateModule.forChild(),
   ],
   declarations: [
     HomePage,

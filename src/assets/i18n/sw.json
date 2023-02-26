@@ -1,0 +1,12 @@
+{
+  "global": { "home": "Nyumbani", "history": "Historia" },
+  "home": {
+    "year_of_completion": "Mwaka wa kumaliza",
+    "candidate_type": "Aina ya mtahiniwa",
+    "school_number": "Namba ya shule",
+    "candidate_number": "Namba ya mtahiniwa",
+    "level": "Daraja",
+    "select_level": "Chagua daraja",
+    "search_results": "Tafuta Matokeo"
+  }
+}

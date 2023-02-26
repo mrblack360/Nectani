@@ -61,7 +61,46 @@ export class ContextMenuComponent implements OnInit {
     {
       label: 'Change Language',
       icon: 'language-outline',
-      handler: () => {},
+      handler: async () => {
+        if (this.appService.currentLanguage == 'en') {
+          const action = this.actionCtrl.create({
+            header:
+              "You're about to change your preferred language to Swahili. Are you sure?",
+            buttons: [
+              {
+                text: 'Yes',
+                role: 'confirm',
+                handler: async () => {
+                  this.appService.changeLanguage('sw');
+                },
+              },
+              {
+                text: 'No',
+                role: 'cancel',
+              },
+            ],
+          });
+          (await action).present();
+        } else {
+          const action = this.actionCtrl.create({
+            header: 'Unaelekea kubadilisha lugha kuwa Kiingereza. Thibitisha?',
+            buttons: [
+              {
+                text: 'Ndio',
+                role: 'confirm',
+                handler: async () => {
+                  this.appService.changeLanguage('en');
+                },
+              },
+              {
+                text: 'Hapana',
+                role: 'cancel',
+              },
+            ],
+          });
+          (await action).present();
+        }
+      },
     },
     {
       label: 'Share with friends',

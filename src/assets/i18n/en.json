@@ -1,0 +1,12 @@
+{
+  "global": { "home": "Home", "history": "History" },
+  "home": {
+    "year_of_completion": "Year of completion",
+    "candidate_type": "Candidate type",
+    "school_number": "School number",
+    "candidate_number": "Candidate number",
+    "level": "Level",
+    "select_level": "Select level",
+    "search_results": "Search Results"
+  }
+}
