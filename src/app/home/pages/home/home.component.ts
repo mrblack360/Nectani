@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import { AppService } from 'src/app/services/app.service';
 
 @Component({
@@ -13,8 +12,8 @@ import { AppService } from 'src/app/services/app.service';
 export class HomeComponent implements OnInit {
   currentYear = new Date().getFullYear();
   candidateTypes = [
-    { value: 'P', description: 'Private' },
-    { value: 'S', description: 'School' },
+    { value: 'P', description: 'private' },
+    { value: 'S', description: 'school' },
   ];
   educationLevel = [
     { value: 'acsee', description: 'A-Level' },
@@ -24,8 +23,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     private appService: AppService,
-    private toastController: ToastController,
-    private translate: TranslateService
+    private toastController: ToastController
   ) {
     this.resultForm = new FormGroup({
       year_completed: new FormControl(this.currentYear, [Validators.required]),

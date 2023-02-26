@@ -11,6 +11,10 @@
     "school_number": "School number",
     "level": "Level",
     "select_level": "Select level",
-    "search_results": "Search Results"
+    "search_results": "Search Results",
+    "candidate_types": {
+      "private": "Private",
+      "school": "School"
+    }
   }
 }

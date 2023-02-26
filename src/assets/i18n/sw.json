@@ -11,6 +11,10 @@
     "candidate_type": "Aina ya mtahiniwa",
     "level": "Daraja",
     "select_level": "Chagua daraja",
-    "search_results": "Tafuta Matokeo"
+    "search_results": "Tafuta Matokeo",
+    "candidate_types": {
+      "private": "Binafsi",
+      "school": "Shule"
+    }
   }
 }

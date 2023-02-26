@@ -45,7 +45,9 @@
             <ion-select-option
               *ngFor="let candidateType of candidateTypes"
               [value]="candidateType.value"
-              >{{ candidateType.description }}</ion-select-option
+              >{{
+                "home.candidate_types." + candidateType.description | translate
+              }}</ion-select-option
             >
           </ion-select>
         </ion-item>
